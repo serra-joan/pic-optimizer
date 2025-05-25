@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Option from '@/components/Option.astro';
+import Upload from '@/assets/icons/Upload.astro';
 
 import { GLOBALS } from '@/constants/globals';
 ---
@@ -12,8 +13,10 @@ import { GLOBALS } from '@/constants/globals';
             <h2 class="text-5xl">Imatge</h2>
             <p>Arrossega i deixa anar la imatge que vols optimitzar</p>
 
-            <div class="border border-primary rounded-lg h-64 max-h-80 mt-6" id="dropzone">
-                
+            <div id="dropzone" class="flex items-center justify-center overflow-hidden border border-primary rounded-lg h-64 max-h-80 mt-6 cursor-pointer" id="dropzone">
+               <Upload id="iconUpload" class="w-16 h-16" />
+               <input type="file" id="fileInput" accept="image/*" class="hidden" />
+               <div id="preview"></div>
             </div>
         </div>
 
@@ -54,3 +57,48 @@ import { GLOBALS } from '@/constants/globals';
          </div>
     </div>
 </Layout>
+
+<script type="module">
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('bg-gray-100');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('bg-gray-100');
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('bg-gray-100');
+        handleFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (!files.length) return;
+        const file = files[0];
+        if (!file.type.startsWith('image/')) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const iconUpload = document.getElementById('iconUpload');
+            iconUpload.classList.add('hidden'); // Oculta l'icona d'upload
+            preview.classList.add('w-full', 'h-full')
+            preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-center object-contain" />`;
+        };
+        reader.readAsDataURL(file);
+
+        // Aquí puedes guardar el archivo para tratarlo después
+        // window.selectedImage = file;
+    }
+</script>
