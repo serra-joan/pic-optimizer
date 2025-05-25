@@ -18,6 +18,12 @@ import { GLOBALS } from '@/constants/globals';
                <input type="file" id="fileInput" accept="image/*" class="hidden" />
                <div id="preview"></div>
             </div>
+
+            <div class="w-full mt-6">
+               <button  id="btnStartResize" class="border border-primary rounded-lg cursor-pointer px-4 py-2 w-full bg-primary text-secondary hover:bg-secondary hover:text-primary">
+                  Iniciar procés
+               </button>
+            </div>
         </div>
 
         <!-- Options -->
@@ -59,46 +65,55 @@ import { GLOBALS } from '@/constants/globals';
 </Layout>
 
 <script type="module">
-    const dropzone = document.getElementById('dropzone');
-    const fileInput = document.getElementById('fileInput');
-    const preview = document.getElementById('preview');
+   import { resizeImage } from '/public/js/compress.js';
 
-    dropzone.addEventListener('click', () => fileInput.click());
+   let globalFile;
+   const dropzone = document.getElementById('dropzone');
+   const fileInput = document.getElementById('fileInput');
+   const preview = document.getElementById('preview');
+   const btnStartResize = document.getElementById('btnStartResize');
 
-    dropzone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropzone.classList.add('bg-gray-100');
-    });
+   dropzone.addEventListener('click', () => fileInput.click());
 
-    dropzone.addEventListener('dragleave', () => {
-        dropzone.classList.remove('bg-gray-100');
-    });
+   dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.classList.add('bg-gray-800');
+   });
 
-    dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('bg-gray-100');
-        handleFiles(e.dataTransfer.files);
-    });
+   dropzone.addEventListener('dragleave', () => {
+      dropzone.classList.remove('bg-gray-800');
+   });
 
-    fileInput.addEventListener('change', (e) => {
-        handleFiles(e.target.files);
-    });
+   dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('bg-gray-800');
+      handleFiles(e.dataTransfer.files);
+   });
 
-    function handleFiles(files) {
-        if (!files.length) return;
-        const file = files[0];
-        if (!file.type.startsWith('image/')) return;
+   fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+   });
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const iconUpload = document.getElementById('iconUpload');
-            iconUpload.classList.add('hidden'); // Oculta l'icona d'upload
-            preview.classList.add('w-full', 'h-full')
-            preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-center object-contain" />`;
-        };
-        reader.readAsDataURL(file);
+   btnStartResize.addEventListener('click', function() {
+      resizeImage(globalFile, "test");
+   })
 
-        // Aquí puedes guardar el archivo para tratarlo después
-        // window.selectedImage = file;
-    }
+   function handleFiles(files) {
+      if (!files.length) return;
+      const file = files[0];
+      if (!file.type.startsWith('image/')) return;
+
+      const reader = new FileReader();
+
+      // Set preview
+      reader.onload = (e) => {
+         const iconUpload = document.getElementById('iconUpload');
+         iconUpload.classList.add('hidden'); // Oculta l'icona d'upload
+         preview.classList.add('w-full', 'h-full')
+         preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-center object-contain" />`;
+      };
+      reader.readAsDataURL(file);
+
+      globalFile = file; // Save the file for later use
+   }
 </script>
