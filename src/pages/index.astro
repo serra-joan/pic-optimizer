@@ -1,11 +1,56 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
+import Option from '@/components/Option.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { GLOBALS } from '@/constants/globals';
 ---
 
 <Layout>
-	<Welcome />
+	<div class="grid grid-cols-6 gap-4">
+        <!-- Dropzone -->
+        <div class="col-span-6 lg:col-span-3 mb-8 lg:mb-0">
+            <h2 class="text-5xl">Imatge</h2>
+            <p>Arrossega i deixa anar la imatge que vols optimitzar</p>
+
+            <div class="border border-primary rounded-lg h-64 max-h-80 mt-6" id="dropzone">
+                
+            </div>
+        </div>
+
+        <!-- Options -->
+         <div class="col-span-full lg:col-span-3">
+            <h2 class="text-5xl">Opcions</h2>
+            <p>Selecciona les opcions d'optimització que vols aplicar a la imatge</p>
+
+            <!-- Desktop -->
+            <div class="mt-6">
+				<Option 
+					device={GLOBALS.DEVICE_DESKTOP}
+					fileName="desktop_image" 
+					width={2560} 
+					height={1440} 
+				/>
+            </div>
+
+            <!-- Tablet -->
+            <div class="mt-6">
+                <Option 
+					device={GLOBALS.DEVICE_TABLET}
+					fileName="tablet_image"
+					width={1024}
+					height={768}
+				/>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mt-6">
+                <Option
+					device={GLOBALS.DEVICE_MOBILE}
+					fileName="mobile_image"
+					width={375}
+					height={667}
+				/>
+            </div>
+         </div>
+    </div>
 </Layout>

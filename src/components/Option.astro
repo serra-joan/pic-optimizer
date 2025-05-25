@@ -1,0 +1,47 @@
+---
+import { GLOBALS } from '../constants/globals.js';
+import Desktop from '@/assets/icons/Desktop.astro';
+import Laptop from '@/assets/icons/Laptop.astro';
+import Tablet from '@/assets/icons/Tablet.astro';
+import Mobile from '@/assets/icons/Mobile.astro';
+
+interface Props {
+    device: string;
+    width: number;
+    height: number;
+    fileName?: string;
+}
+const { device, width, height, fileName } = Astro.props;
+
+const deviceAllowed = [GLOBALS.DEVICE_DESKTOP, GLOBALS.DEVICE_LAPTOP, GLOBALS.DEVICE_TABLET, GLOBALS.DEVICE_MOBILE];
+---
+<div class="grid grid-cols-3 gap-2">
+    <div class="col-span-full flex items-center gap-2">
+        {
+            device === GLOBALS.DEVICE_DESKTOP && <Desktop class="w-8 h-8" />
+        }
+        {
+            device === GLOBALS.DEVICE_LAPTOP && <Laptop class="w-8 h-8" />
+        }
+        {
+            device === GLOBALS.DEVICE_TABLET && <Tablet class="w-8 h-8" />
+        }
+        {
+            device === GLOBALS.DEVICE_MOBILE && <Mobile class="w-8 h-8" />
+        }
+        <h3 class="text-3xl">{device}</h3>
+    </div>
+
+    <div class="col-span-full sm:col-span-1">
+        <label for="format" class="block text-md text-primary">Nom del fitxer</label>
+        <input type="text" id="inpFileName" name="inpFileName" class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" placeholder="Nom del fitxer" value={fileName || ''}>
+    </div>
+    <div class="col-span-full sm:col-span-1">
+        <label for="format" class="block text-md text-primary">Width</label>
+        <input type="number" id="inpWidth" name="inpWidth" class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" value={width}>
+    </div>
+    <div class="col-span-full sm:col-span-1">
+        <label for="format" class="block text-md text-primary">Height</label>
+        <input type="number" id="inpHeight" name="inpHeight" class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" value={height}>
+    </div>
+</div>
