@@ -35,7 +35,7 @@ import { GLOBALS } from '@/constants/globals';
             <div class="mt-6">
 				<Option 
 					device={GLOBALS.DEVICE_DESKTOP}
-					fileName="desktop_image" 
+					fileName="image_desktop" 
 					maxWidthOrHeight={2560} 
 				/>
             </div>
@@ -44,7 +44,7 @@ import { GLOBALS } from '@/constants/globals';
             <div class="mt-6">
                 <Option 
 					device={GLOBALS.DEVICE_TABLET}
-					fileName="tablet_image"
+					fileName="image_tablet"
 					maxWidthOrHeight={1200}
 				/>
             </div>
@@ -53,7 +53,7 @@ import { GLOBALS } from '@/constants/globals';
             <div class="mt-6">
                 <Option
 					device={GLOBALS.DEVICE_MOBILE}
-					fileName="mobile_image"
+					fileName="image_mobile"
 					maxWidthOrHeight={750}
 				/>
             </div>
@@ -123,9 +123,16 @@ import { GLOBALS } from '@/constants/globals';
       // Set preview
       reader.onload = (e) => {
          const iconUpload = document.getElementById('iconUpload');
-         iconUpload.classList.add('hidden'); // Oculta l'icona d'upload
+         iconUpload.classList.add('hidden'); // Hide the upload icon
          preview.classList.add('w-full', 'h-full')
          preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-center object-contain" />`;
+
+         // Set file names
+         const options = document.querySelectorAll('.options-container input[name="inpFileName"]');
+         options.forEach(option => {
+            const device = option.closest('.options-container').dataset.device;
+            option.value = file.name.split('.')[0] + `_${device}` || `image_${device || ''}`;
+         });
       };
       reader.readAsDataURL(file);
 

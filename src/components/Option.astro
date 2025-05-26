@@ -13,7 +13,7 @@ interface Props {
 const { device, maxWidthOrHeight, fileName } = Astro.props;
 
 ---
-<div class="grid grid-cols-2 gap-2 options-container">
+<div class="grid grid-cols-2 gap-2 options-container" data-device={device}>
     <div class="col-span-full flex items-center gap-2">
         {
             device === GLOBALS.DEVICE_DESKTOP && <Desktop class="w-8 h-8" />
