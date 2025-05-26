@@ -6,16 +6,18 @@ import imageCompression from 'browser-image-compression';
  * @param {string} fileName - The name for the downloaded file, without extension.
  * @returns {Promise<void>}
  */
-export async function resizeImage(file, fileName) {
+export async function resizeImage(file, optionsParams = {}) {
     const options = {
         maxSizeMB: 3, // MB
-        maxWidthOrHeight: 1920, // Width or height max
         useWebWorker: true, // Use web worker for compression
-        fileType: 'image/webp' // Output file type
+        fileType: 'image/webp', // Output file type
+
+        maxWidthOrHeight: optionsParams.maxWidthOrHeight || 1440, // Width or height max
+        initialQuality: optionsParams.initialQuality || 0.8, // Initial quality
     };
 
     const resizedImage = await imageCompression(file, options);
-    downloadImage(resizedImage, fileName);
+    downloadImage(resizedImage, optionsParams.fileName || 'compressed_image');
 }
 
 function downloadImage(file, fileName = 'compressed_image') {

@@ -7,14 +7,13 @@ import Mobile from '@/assets/icons/Mobile.astro';
 
 interface Props {
     device: string;
-    width: number;
-    height: number;
+    maxWidthOrHeight: number;
     fileName?: string;
 }
-const { device, width, height, fileName } = Astro.props;
+const { device, maxWidthOrHeight, fileName } = Astro.props;
 
 ---
-<div class="grid grid-cols-3 gap-2">
+<div class="grid grid-cols-2 gap-2 options-container">
     <div class="col-span-full flex items-center gap-2">
         {
             device === GLOBALS.DEVICE_DESKTOP && <Desktop class="w-8 h-8" />
@@ -28,7 +27,7 @@ const { device, width, height, fileName } = Astro.props;
         {
             device === GLOBALS.DEVICE_MOBILE && <Mobile class="w-8 h-8" />
         }
-        <h3 class="text-3xl">{device}</h3>
+        <h3 class="text-3xl">{device.charAt(0).toUpperCase() + device.slice(1)}</h3>
     </div>
 
     <div class="col-span-full sm:col-span-1">
@@ -42,23 +41,13 @@ const { device, width, height, fileName } = Astro.props;
         >
     </div>
     <div class="col-span-full sm:col-span-1">
-        <label for="format" class="block text-md text-primary">Width</label>
+        <label for="format" class="block text-md text-primary">Max width or height (px)</label>
         <input 
             type="number" 
-            id="inpWidth" 
+            id="inpMaxWidthOrHeight" 
             name="inpWidth" 
             class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
-            value={width}
-        >
-    </div>
-    <div class="col-span-full sm:col-span-1">
-        <label for="format" class="block text-md text-primary">Height</label>
-        <input 
-            type="number" 
-            id="inpHeight" 
-            name="inpHeight" 
-            class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
-            value={height}
+            value={maxWidthOrHeight}
         >
     </div>
 </div>

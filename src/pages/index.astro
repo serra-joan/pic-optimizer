@@ -36,8 +36,7 @@ import { GLOBALS } from '@/constants/globals';
 				<Option 
 					device={GLOBALS.DEVICE_DESKTOP}
 					fileName="desktop_image" 
-					width={2560} 
-					height={1440} 
+					maxWidthOrHeight={2560} 
 				/>
             </div>
 
@@ -46,8 +45,7 @@ import { GLOBALS } from '@/constants/globals';
                 <Option 
 					device={GLOBALS.DEVICE_TABLET}
 					fileName="tablet_image"
-					width={1024}
-					height={768}
+					maxWidthOrHeight={1200}
 				/>
             </div>
 
@@ -56,8 +54,7 @@ import { GLOBALS } from '@/constants/globals';
                 <Option
 					device={GLOBALS.DEVICE_MOBILE}
 					fileName="mobile_image"
-					width={375}
-					height={667}
+					maxWidthOrHeight={750}
 				/>
             </div>
          </div>
@@ -95,7 +92,25 @@ import { GLOBALS } from '@/constants/globals';
    });
 
    btnStartResize.addEventListener('click', function() {
-      resizeImage(globalFile, "test");
+      // Download the images resized
+      const options = document.querySelectorAll('.options-container');
+
+      options.forEach(option => {
+         const device = option.querySelector('h3').textContent.toLowerCase();
+         const fileName = option.querySelector('input[name="inpFileName"]').value || `${device}_image`;
+         const maxWidthOrHeight = parseInt(option.querySelector('input[name="inpWidth"]').value, 10) || 0;
+
+         const optionsParams = {
+            device,
+            fileName,
+            maxWidthOrHeight
+         };
+
+         // Init process
+         if (globalFile && maxWidthOrHeight > 0) {
+            resizeImage(globalFile, optionsParams);
+         }
+      });
    })
 
    function handleFiles(files) {
