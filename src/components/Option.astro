@@ -30,23 +30,23 @@ const { device, maxWidthOrHeight, fileName } = Astro.props;
         <h3 class="text-3xl">{device.charAt(0).toUpperCase() + device.slice(1)}</h3>
     </div>
 
-    <div class="col-span-full sm:col-span-1">
-        <label for="format" class="block text-md text-primary">Nom del fitxer</label>
+    <div class="col-span-full sm:col-span-1 text-gray-300">
+        <label for="format" class="block text-md ">Nom del fitxer</label>
         <input 
             type="text" 
             id="inpFileName" 
             name="inpFileName" 
-            class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
+            class="mt-1 p-2 block w-full border bg-gray-950 border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
             placeholder="Nom del fitxer" value={fileName || ''}
         >
     </div>
-    <div class="col-span-full sm:col-span-1">
-        <label for="format" class="block text-md text-primary">Max width or height (px)</label>
+    <div class="col-span-full sm:col-span-1 text-gray-300">
+        <label for="format" class="block text-md">Max width or height (px)</label>
         <input 
             type="number" 
             id="inpMaxWidthOrHeight" 
             name="inpWidth" 
-            class="mt-1 p-2 block w-full border border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
+            class="mt-1 p-2 block w-full border bg-gray-950 border-primary rounded-md shadow-sm focus:ring-primary focus:border-primary" 
             value={maxWidthOrHeight}
         >
     </div>
