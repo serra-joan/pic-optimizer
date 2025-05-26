@@ -1,4 +1,3 @@
-import imageCompression from 'browser-image-compression';
 
 /**
  * Compresses an image file and downloads it in WebP format.
@@ -6,11 +5,12 @@ import imageCompression from 'browser-image-compression';
  * @param {string} fileName - The name for the downloaded file, without extension.
  * @returns {Promise<void>}
  */
-export async function resizeImage(file, optionsParams = {}) {
+async function resizeImage(file, optionsParams = {}) {
     const options = {
         maxSizeMB: 3, // MB
         useWebWorker: true, // Use web worker for compression
         fileType: 'image/webp', // Output file type
+        libURL: '/assets/js/browser-image-compression.js',
 
         maxWidthOrHeight: optionsParams.maxWidthOrHeight || 1440, // Width or height max
         initialQuality: optionsParams.initialQuality || 0.8, // Initial quality
