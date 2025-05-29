@@ -34,12 +34,14 @@ btnStartResize.addEventListener('click', () => {
 
     options.forEach(option => {
         const device = option.querySelector('h3').textContent.toLowerCase();
+        const initialQuality = document.getElementById('inpQualityRange').value || 80;
         const fileName = option.querySelector('input[name="inpFileName"]').value || `${device}_image`;
         const maxWidthOrHeight = parseInt(option.querySelector('input[name="inpWidth"]').value, 10) || 0;
 
         const optionsParams = {
         device,
         fileName,
+        initialQuality,
         maxWidthOrHeight
         };
 
