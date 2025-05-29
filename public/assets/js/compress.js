@@ -15,7 +15,7 @@ async function resizeImage(file, optionsParams = {}) {
         maxWidthOrHeight: optionsParams.maxWidthOrHeight || 1440, // Width or height max
         initialQuality: optionsParams.initialQuality || 0.8, // Initial quality
     };
-
+console.log('Resizing image with options:', options);
     const resizedImage = await imageCompression(file, options);
     downloadImage(resizedImage, optionsParams.fileName || 'compressed_image');
 }

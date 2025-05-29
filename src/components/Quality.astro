@@ -1,0 +1,19 @@
+---
+
+---
+
+<div class="w-full max-w-sm">
+  <label for="inpQualityRange" class="block mb-2 text-lg font-medium float-end">
+    Qualitat: <span id="quality-value">0.80</span>
+  </label>
+  <input
+    id="inpQualityRange"
+    type="range"
+    min="0"
+    max="1"
+    step="0.05"
+    value="0.8"
+    class="w-full accent-white"
+    oninput="document.getElementById('quality-value').textContent = Number(this.value).toFixed(2)"
+  />
+</div>

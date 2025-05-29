@@ -3,6 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import Option from '@/components/Option.astro';
 import Upload from '@/assets/icons/Upload.astro';
 import Button from '@/components/Button.astro';
+import Quality from '@/components/Quality.astro';
 import Add from '@/assets/icons/Add.astro';
 
 import { GLOBALS } from '@/constants/globals';
@@ -32,6 +33,10 @@ import { GLOBALS } from '@/constants/globals';
          <div class="col-span-full lg:col-span-3">
             <h2 class="text-5xl">Opcions</h2>
             <p>Selecciona les opcions d'optimització que vols aplicar a la imatge</p>
+
+            <div class="mt-6 flex justify-end">
+               <Quality />
+            </div>
 
             <div id="optionsContainer">
                <!-- Desktop -->
