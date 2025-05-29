@@ -4,6 +4,8 @@ const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
 const btnAddOption = document.getElementById('btnAddOption');
 const btnStartResize = document.getElementById('btnStartResize');
+const inpQualityRange = document.getElementById('inpQualityRange');
+const labelQualityRange = document.getElementById('labelQualityRange');
 const optionsContainer = document.getElementById('optionsContainer');
 
 dropzone.addEventListener('click', () => fileInput.click());
@@ -25,6 +27,11 @@ dropzone.addEventListener('drop', (e) => {
 
 fileInput.addEventListener('change', (e) => {
     handleFiles(e.target.files);
+});
+
+// Initial quality range value
+inpQualityRange.addEventListener('input', (e) => {
+    labelQualityRange.textContent = `Quality: ${Number(inpQualityRange.value).toFixed(2)}`;
 });
 
 // Start resize button and the download
