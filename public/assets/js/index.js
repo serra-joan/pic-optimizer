@@ -135,6 +135,17 @@ function handleFiles(files) {
         preview.classList.add('w-full', 'h-full')
         preview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-center object-contain" />`;
 
+        // Set original resolution and size
+        const img = new Image();
+        img.onload = () => {
+            const originalResolution = document.querySelector('#originalResolution span');
+            
+            const fileSize = (file.size / 1000).toFixed(2); // Size in KB
+            originalResolution.innerText = `${img.width} x ${img.height}, ${fileSize} KB`;
+
+        };
+        img.src = e.target.result; // Set the image source to execute the onload event
+
         // Set file names
         const options = document.querySelectorAll('.options-container input[name="inpFileName"]');
         options.forEach(option => {
