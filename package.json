@@ -14,5 +14,8 @@
     "astro": "^5.8.0",
     "browser-image-compression": "^2.0.2",
     "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "wrangler": "^4.61.0"
   }
 }
