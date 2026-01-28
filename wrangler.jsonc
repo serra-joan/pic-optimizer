@@ -1,17 +1,5 @@
 {
-	"main": "dist/_worker.js/index.js",
 	"name": "pic-optimizer",
   "compatibility_date": "2026-01-28",
-  "pages_build_output_dir": "./dist",
-  "compatibility_flags": [
-    "nodejs_compat",
-    "global_fetch_strictly_public"
-  ],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist"
-	},
-	"observability": {
-    "enabled": true
-  }
+  "pages_build_output_dir": "./dist"
 }
