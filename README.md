@@ -1,6 +1,6 @@
 # Pic Optimizer
 
-Eina web per optimitzar i convertir imatges a format **WebP**, construïda amb [Astro](https://astro.build).
+Eina web per optimitzar i convertir imatges a format **WebP** localment, des del navegador, construïda amb [Astro](https://astro.build).
 
 ## 🚀 Execució en local
 
