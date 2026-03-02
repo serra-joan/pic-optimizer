@@ -1,48 +1,40 @@
-# Astro Starter Kit: Basics
+# Pic Optimizer
+
+Eina web per optimitzar i convertir imatges a format **WebP**, construïda amb [Astro](https://astro.build).
+
+## 🚀 Execució en local
 
 ```sh
-npm create astro@latest -- --template basics
+pnpm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+El servidor de desenvolupament s'iniciarà a `localhost:4321`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Funcionalitats
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Conversió a WebP
 
-## 🚀 Project Structure
+Puja qualsevol imatge i l'eina la convertirà automàticament al format **WebP**.
 
-Inside of your Astro project, you'll see the following folders and files:
+### Redimensionament múltiple
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Pots escollir diverses dimensions de sortida alhora. Per defecte, l'eina inclou tres mides predefinides:
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- 📱 **Mòbil**
+- 📟 **Tauleta**
+- 🖥️ **Escriptori**
 
-## 🧞 Commands
+Pots afegir tantes dimensions addicionals com necessitis.
 
-All commands are run from the root of the project, from a terminal:
+### Com funciona el redimensionament
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+En especificar les dimensions, indiques els **píxels màxims** del costat més gran. L'eina redimensiona de manera proporcional:
 
-## 👀 Want to learn more?
+| Imatge original | Píxels màxims | Resultat    |
+| :-------------- | :-----------: | ----------: |
+| 1200 × 900      | 1000          | 1000 × 750  |
+| 900 × 1200      | 1000          | 750 × 1000  |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Qualitat de la conversió
+
+Pots triar el percentatge de qualitat amb el qual es convertirà la imatge a WebP. El valor per defecte és **80%**.
